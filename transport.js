@@ -1,7 +1,9 @@
 const nodemailer = require('nodemailer')
 const axios = require('axios')
 require('dotenv').config();
+var sgTransport = require('nodemailer-sendgrid-transport');
 var { codechefData } = require('./extract')
+
 
 function time (second) {
     var sec_num = parseInt(second, 10); // don't forget the second param
@@ -15,13 +17,13 @@ function time (second) {
     return hours+':'+minutes+':'+seconds;
 }
 const tranporter = async()=>{
-	const driver = nodemailer.createTransport({
-			service: 'gmail',
+	const driver = nodemailer.createTransport(sgTransport({
 			auth: {
-				user: process.env.EMAIL,
-				pass: process.env.PASSWORD
+				api_user: process.env.EMAIL,
+				api_key: process.env.PASSWORD
 			}
 		})
+	)
 	const codechef_data = await codechefData();
 	message = ''
 	var error;
