@@ -1,23 +1,37 @@
-const puppeteer = require('puppeteer');
+const cheerio = require('cheerio');
+const axios = require('axios')
 
 url = 'https://www.codechef.com/contests'
-const hello = async () => {
-const browser = await puppeteer.launch({
-  headless: true,
-});
-const page = await browser.newPage();
-//await page.setRequestInterception(true);
-await page.goto('https://www.codechef.com/contests');
-const data = await page.evaluate(() => {
-    const tds = Array.from(document.querySelectorAll('table tr td'))
-    return tds.map(td => td.innerText)
-  });
 
-  //You will now have an array of strings
-  //[ 'One', 'Two', 'Three', 'Four' ]
-  console.log(data);
-  //One
-  console.log(data[0]);
-  await browser.close()
-  };
-  hello()
+const codechefData = async () => {
+
+	const res = await axios.get(url)
+	const $ = cheerio.load(res.data);
+	const data = []
+	var rowData = {}
+	$('.dataTable tr td').each(function(i){
+
+		if(i < 40)
+		{
+			switch(i%4)
+			{
+				case 0: rowData["code"] = $(this).text().trim()
+						break;
+				case 1: rowData["name"] = $(this).text().trim()
+						break;
+				case 2: rowData["start"] = $(this).text().trim()
+						break;
+				case 3: rowData["end"] = $(this).text().trim()
+						data.push(rowData)
+						rowData = {}
+						break;
+				
+			}
+		}
+	})
+	return data;
+};
+
+module.exports = {
+	codechefData: codechefData
+}

@@ -4,14 +4,13 @@ var exec = require('child_process').exec;
 function puts(error, stdout, stderr) { console.log(stdout) }
 
 const checkForContest = async () =>{
-	exec("ping -c 3 localhost", puts);
+	exec("ping -c 3 contest-remainder-service.herokuapp.com", puts);
 	var d = new Date();
 	var hour = d.getHours();
 	var minute = d.getMinutes();
 	var second = d.getSeconds();
-	console.log("H: ", hour," M: ", minute," S: ", second)
-	if((hour == 16)&&(minute >= 11)&&(minute < 12)&&(second > 0)&&(second < 10)){ //3600000
-		await transporter('data');
+	if((hour == 1)&&(minute >= 0)&&(minute < 1)&&(second > 0)&&(second < 10)){ //3600000
+		await transporter();
 		checkForContest();	
 	} else {
 		console.log("NO Data");
