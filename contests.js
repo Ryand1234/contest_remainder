@@ -15,7 +15,7 @@ const checkForContest = async () =>{
 		checkForContest();	
 	} else {
 		console.log("NO Data");
-		setTimeout(()=>{checkForContest()}, 3600000);
+		setTimeout(()=>{checkForContest()}, 6000);
 		return;	
 	}
 }
