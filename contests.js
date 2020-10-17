@@ -11,7 +11,7 @@ const checkForContest = async () =>{
 	var minute = d.getMinutes();
 	var second = d.getSeconds();
 	console.log("H: ",hour," M: ",minute," S: ",second);
-	if((hour == 19)&&(minute >= 56)&&(minute < 57)&&(second > 0)&&(second < 10)){ //3600000
+	if((hour == 19)&&(minute >= 58)&&(minute < 59)&&(second > 0)&&(second < 10)){ //3600000
 		console.log("MAIL")
 		await transporter();
 		checkForContest();	
