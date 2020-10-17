@@ -110,6 +110,9 @@ const tranporter = async()=>{
 		if(err){
 			console.log("Error: "+err)
 		}
+		else {
+			console.log("Email Sent")
+		}
 	})
 }
 
