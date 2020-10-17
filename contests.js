@@ -10,7 +10,7 @@ const checkForContest = async () =>{
 	var minute = d.getMinutes();
 	var second = d.getSeconds();
 	console.log("H: ", hour," M: ", minute," S: ", second)
-	if((hour == 14)&&(minute > 50)){ //3600000
+	if((hour == 16)&&(minute >= 11)&&(minute < 12)&&(second > 0)&&(second < 10)){ //3600000
 		await transporter('data');
 		checkForContest();	
 	} else {

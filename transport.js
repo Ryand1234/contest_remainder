@@ -29,40 +29,41 @@ const tranporter = async(data)=>{
 		message += (
 				'<p>Hello Riyan,</p>' +
 				'<p>This is a list of upcoming and present Contest on Codechef and Codeforces.</p>' +
-				'<p>Codechef</p>' +
-				'<thead>' +
+				'<p>CodeForces Contest List</p>' +
+				'<table style="border: 1px solid cyan; border-collapse: collapse; width: 100%;">' +
+				
 		            '<tr>' +
-		                '<th align="center" style="width:16%;">' +
+		                '<th align="center" style="border: 1px solid cyan; dth:16%; text-align: center;">' +
 		                        'CODE' +
 		                '</th>' +
-		                '<th align="center">' +
+		                '<th align="center" style="border: 1px solid cyan; text-align: center;">' +
 		                        'NAME' +
 		                '</th>' +
-		                '<th align="center" style="width:16%;">' +
+		                '<th align="center" style="width:16%; text-align: center;">' +
 		                        'START' +
 		                '</th>' +
-		                '<th align="center" style="width:16%;">' +
-		                        'END' +
+		                '<th align="center" style="border: 1px solid cyan; width:16%; text-align: center;">' +
+		                        'CONTEST DURATION' +
 		                '</th>' +
-		            '</tr>' +
-				'</thead>' +
-				'<tbody>'
+		            '</tr>'
 			)
 		let codeforces_data = await axios('https://codeforces.com/api/contest.list')
 		codeforces_data = codeforces_data.data.result;
-		for(var i = 0; i < codeforces_data.length; i++)
+		for(var i = codeforces_data.length; i >= 0; i--)
 		{
 			if(codeforces_data[i].phase == 'FINISHED')
 				break;
+			var date = new Date(codeforces_data[i].startTimeSeconds*1000)
+			var local_date = new Date(date)
 			message += (
 				'<tr>' +
-				'<td>' + codeforces_data[i].id+ '</td>' +
-				'<td>' + codeforces_data[i].name + '</td' + 
-				'<td>' + time(codeforces_data[i].startTimeSeconds) + '</td' + 
-				'<td>' + time(codeforces_data[i].durationSeconds) + '</td> </tr>' 
+				'<td style="border: 1px solid cyan; text-align: center;">' + codeforces_data[i].id+ '</td>' +
+				'<td style="border: 1px solid cyan; text-align: center;">' + codeforces_data[i].name + '</td>' + 
+				'<td style="border: 1px solid cyan; text-align: center;">' + local_date.toLocaleString() + '</td>' + 
+				'<td style="border: 1px solid cyan; text-align: center;">' + time(codeforces_data[i].durationSeconds) + '</td> </tr>' 
 				);
 		}
-		message += '</tbody>'
+		message += '</table>'
 	}
 
 	var mailOptions = {
