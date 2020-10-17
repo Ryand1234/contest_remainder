@@ -10,7 +10,9 @@ const checkForContest = async () =>{
 	var hour = d.getHours();
 	var minute = d.getMinutes();
 	var second = d.getSeconds();
-	if((hour == 1)&&(minute >= 20)&&(minute < 21)&&(second > 0)&&(second < 10)){ //3600000
+	console.log("H: ",hour," M: ",minute," S: ",second);
+	if((hour == 1)&&(minute >= 22)&&(minute < 23)&&(second > 0)&&(second < 10)){ //3600000
+		console.log("MAIL")
 		await transporter();
 		checkForContest();	
 	} else {
