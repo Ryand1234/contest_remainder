@@ -10,14 +10,16 @@ const checkForContest = async () =>{
 	var hour = d.getHours();
 	var minute = d.getMinutes();
 	var second = d.getSeconds();
+	var send = true;
 	console.log("H: ",hour," M: ",minute," S: ",second);
-	if((hour == 8)&&(minute >= 19)&&(minute < 20)&&(second > 0)&&(second < 10)){ //3600000
-		console.log("MAIL")
+	if((hour == 8)&&(minute >= 19)&&(minute < 20)&&(second > 0)&&(second < 30)&&(send != true)){ //3600000
 		await transporter();
-		checkForContest();	
+		send = true;
+		checkForContest();
 	} else {
 		console.log("NO Data");
-		setTimeout(()=>{checkForContest()}, 6000);
+		send = false;
+		setTimeout(()=>{checkForContest()}, 2000000);
 		return;	
 	}
 }
