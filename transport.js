@@ -19,8 +19,8 @@ function time (second) {
 const tranporter = async()=>{
 	const driver = nodemailer.createTransport(sgTransport({
 			auth: {
-				api_user: process.env.EMAIL,
-				api_key: process.env.PASSWORD
+				user: process.env.EMAIL,
+				pass: process.env.PASSWORD
 			}
 		})
 	)
