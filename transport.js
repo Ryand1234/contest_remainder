@@ -17,12 +17,12 @@ function time (second) {
     return hours+':'+minutes+':'+seconds;
 }
 const tranporter = async()=>{
-	const driver = nodemailer.createTransport(sgTransport({
+	const driver = nodemailer.createTransport({
 			auth: {
 				user: process.env.EMAIL,
 				pass: process.env.PASSWORD
 			}
-		})
+		}
 	)
 	const codechef_data = await codechefData();
 	message = ''
