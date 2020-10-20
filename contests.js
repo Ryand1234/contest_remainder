@@ -8,7 +8,7 @@ const checkForContest = async () =>{
 	var minute = d.getMinutes();
 	var second = d.getSeconds();
 	console.log("H: ",hour," M: ",minute," S: ",second);
-	if((hour == 11)&&(minute >= 4)&&(minute < 5)){ //3600000
+	if((hour == 11)&&(minute >= 0)&&(minute < 10)){ //3600000
 		await transporter();
 		setTimeout(()=>{checkForContest()}, 900000);
 		return;
